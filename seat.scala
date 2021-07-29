@@ -48,6 +48,7 @@ object seat extends App {
 
 //to reserve the seat
 def reserveseat(seatlist: Array[Array[String]], details:Array[Int]){
+  
   var s = seatlist(details(0))(details(1))
   if(s(0) == '0')
   {
@@ -58,8 +59,10 @@ def reserveseat(seatlist: Array[Array[String]], details:Array[Int]){
     }
     var seat:String = d(0) + d(1) + d(2) + d(3)
     seatlist(details(0))(details(1)) = seat
+    println(seat)
     println("Your seat reserved Successfuly..!")
   }
+  
   else if( s(0) == 'x' && ( s(1) == '0' || s(2) == '0' || s(3) == '0') )
   {
     var ch:Array[String] = Array("x", "0", "0", "0")
@@ -67,7 +70,15 @@ def reserveseat(seatlist: Array[Array[String]], details:Array[Int]){
     {
       ch(x) = "1"
     }
-    if(ch(1)!=s(1).toString && ch(2)!=s(2).toString && ch(3)!=s(3).toString)
+    var fl = 0
+    for(i <- 0 to 3)
+    {
+      if(ch(i)== "1" && (ch(i) == s(i).toString))
+      {
+        fl = 1
+      }
+    }
+    if(fl == 0)
     {
       for(i <- 1 to 3)
       {
@@ -78,15 +89,18 @@ def reserveseat(seatlist: Array[Array[String]], details:Array[Int]){
       }
       var seat:String = ch(0) + ch(1) + ch(2) + ch(3)
       seatlist(details(0))(details(1)) = seat
+      println(seat)
       println("Your seat reserved Successfuly..!\n")
     }
     else
     {
+      println(s)
       println("Seat is already reserverd..!\n")
     }
   }
   else
   {
+    println(s)
     println("Seat is already reserverd..!\n")
   }
 }
